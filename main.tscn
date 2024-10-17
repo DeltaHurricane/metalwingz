@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://dyx0m3biyrglv"]
+
+[ext_resource type="PackedScene" uid="uid://dwwpbyho4tqlq" path="res://ship/ship.tscn" id="1_boylg"]
+[ext_resource type="PackedScene" uid="uid://cs4jd4520axrw" path="res://testShip/testShip.tscn" id="2_3rkel"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grvg7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gxcmc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6c32e"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_83mhh"]
+radius = 52.0096
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0532l"]
+distance = -400.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1h2u1"]
+normal = Vector2(-1, 0)
+distance = -600.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5nksg"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_aefkb"]
+normal = Vector2(1, 0)
+
+[node name="Main" type="Node"]
+
+[node name="Ship" parent="." instance=ExtResource("1_boylg")]
+position = Vector2(184, 168)
+rotation = 1.5708
+collision_layer = 1
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_grvg7")
+
+[node name="TestShip" parent="." instance=ExtResource("2_3rkel")]
+position = Vector2(440, 232)
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_gxcmc")
+gravity_scale = 1.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(336, 256)
+collision_mask = 5
+physics_material_override = SubResource("PhysicsMaterial_6c32e")
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_83mhh")
+
+[node name="Mundo" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mundo"]
+shape = SubResource("WorldBoundaryShape2D_0532l")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Mundo"]
+shape = SubResource("WorldBoundaryShape2D_1h2u1")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Mundo"]
+shape = SubResource("WorldBoundaryShape2D_5nksg")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Mundo"]
+shape = SubResource("WorldBoundaryShape2D_aefkb")
