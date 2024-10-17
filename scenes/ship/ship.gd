@@ -1,9 +1,11 @@
 extends RigidBody2D
+class_name Ship
 
 signal start_dmg(body: Node2D)
 signal stop_dmg(body: Node2D)
+signal dead(name: String)
 
-@export var health:int = 10
+@export var health:float = 3
 @export var radarHeight:float = 1.0
 @export var radarWidth:float = 1.0
 @export var max_speed:int = 200 # How fast the player will move (pixels/sec).
@@ -37,17 +39,19 @@ func _process(delta: float) -> void:
 		#print(get_colliding_bodies())
 		#print(linear_velocity)
 		#print(rad_to_deg(rotation))
+	if(health <= 0):
+		dead.emit(self.name)
+		queue_free()
 	
 func _integrate_forces(state):
 	var leng = min(max_speed, state.linear_velocity.length())
 	state.linear_velocity = state.linear_velocity.normalized() * leng
 	
-func hit():
-	health -=1
+func hit(dano: float):
+	health -= dano
 
 
 func _on_radar_body_entered(body: Node2D) -> void:
-		print('entrou')
 		start_dmg.emit(body)
 		#print((body.global_position.distance_to(global_position)))
 		#print(body)
@@ -57,8 +61,6 @@ func _on_radar_body_entered(body: Node2D) -> void:
 	
 
 func _on_radar_body_exited(body: Node2D) -> void:
-	#quando distancia for 0 ta se identificando
-		print('exited')
 		stop_dmg.emit(body)
 		#print((body.global_position.distance_to(global_position)))
 		#print(body)

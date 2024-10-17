@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyx0m3biyrglv"]
+[gd_scene load_steps=8 format=3 uid="uid://dyx0m3biyrglv"]
 
 [ext_resource type="PackedScene" uid="uid://dwwpbyho4tqlq" path="res://scenes/ship/ship.tscn" id="1_boylg"]
 [ext_resource type="PackedScene" uid="uid://cs4jd4520axrw" path="res://scenes/testShip/testShip.tscn" id="2_3rkel"]
+[ext_resource type="PackedScene" uid="uid://be3qcxgad5euq" path="res://mundo.tscn" id="3_vs3sm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grvg7"]
 
@@ -12,19 +13,6 @@ bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_83mhh"]
 radius = 52.0096
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0532l"]
-distance = -400.0
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1h2u1"]
-normal = Vector2(-1, 0)
-distance = -600.0
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5nksg"]
-normal = Vector2(0, 1)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_aefkb"]
-normal = Vector2(1, 0)
 
 [node name="Main" type="Node"]
 
@@ -51,18 +39,4 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CircleShape2D_83mhh")
 
-[node name="Mundo" type="StaticBody2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mundo"]
-shape = SubResource("WorldBoundaryShape2D_0532l")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Mundo"]
-shape = SubResource("WorldBoundaryShape2D_1h2u1")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Mundo"]
-shape = SubResource("WorldBoundaryShape2D_5nksg")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Mundo"]
-shape = SubResource("WorldBoundaryShape2D_aefkb")
+[node name="Mundo" parent="." instance=ExtResource("3_vs3sm")]
