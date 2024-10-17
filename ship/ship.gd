@@ -1,26 +1,24 @@
 extends RigidBody2D
 
+signal start_dmg(body: Node2D)
+signal stop_dmg(body: Node2D)
+
 @export var health:int = 10
 @export var max_speed:int = 200 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	on_colision() #começar sem o radar
 	
 
 func _process(delta: float) -> void:
 	var impulse = 0
 	var torque = 0
 	if Input.is_action_pressed("move_right"):
-		torque = 200
-		impulse = 50
-		
-		
+		torque = 500
 	if Input.is_action_pressed("move_left"):
-		torque = -200
-		impulse = 50
-		
-		
+		torque = -500
 	if Input.is_action_pressed("move_down"):
 		impulse = -1000
 	if Input.is_action_pressed("move_up"):
@@ -46,27 +44,31 @@ func hit():
 
 
 func _on_radar_body_entered(body: Node2D) -> void:
-	print('entered')
-	print((body.global_position.distance_to(global_position)))
-	print(body)
-	print(body.has_signal('teste'))
-	if(body.has_method('teste')):
-		body.teste.emit()
+	if(body != self):
+		print('entrou')
+		start_dmg.emit(body)
+		#print((body.global_position.distance_to(global_position)))
+		#print(body)
+		#print(body.has_signal('teste'))
+		#if(body.has_method('teste')):
+			#body.teste.emit()
 	
 
 func _on_radar_body_exited(body: Node2D) -> void:
 	#quando distancia for 0 ta se identificando
-	print('exited')
-	print((body.global_position.distance_to(global_position)))
-	print(body)
+	if(body != self):
+		print('exited')
+		stop_dmg.emit(body)
+		#print((body.global_position.distance_to(global_position)))
+		#print(body)
 	
 
 func on_colision():
 	$DisabledRadar.stop()
 	$DisabledRadar.start()
 	var radar: Area2D = $Radar
+	radar.scale = Vector2(0,0)
 	radar.hide()
-	#teste
 	radar.set_deferred("disabled", true) 
 
 	
@@ -76,7 +78,7 @@ func _on_disabled_radar_timeout() -> void:
 	var radar: Area2D = $Radar
 	radar.scale = Vector2(0,0)
 	radar.show()
-	radar.set_deferred("disabled", false)
 	var tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(radar, "scale", Vector2(1,1),2)
+	radar.set_deferred("disabled", false)
 	
