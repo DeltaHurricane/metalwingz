@@ -32,10 +32,10 @@ func _process(delta: float) -> void:
 	var colision = get_contact_count()
 	if(colision != 0):
 		on_colision()
-		print(colision)
-		print(get_colliding_bodies())
-		print(linear_velocity)
-		print(rad_to_deg(rotation))
+		#print(colision)
+		#print(get_colliding_bodies())
+		#print(linear_velocity)
+		#print(rad_to_deg(rotation))
 	
 func _integrate_forces(state):
 	var leng = min(max_speed, state.linear_velocity.length())
@@ -46,6 +46,7 @@ func hit():
 
 
 func _on_radar_body_entered(body: Node2D) -> void:
+	print('entered')
 	print((body.global_position.distance_to(global_position)))
 	print(body)
 	print(body.has_signal('teste'))
@@ -53,11 +54,17 @@ func _on_radar_body_entered(body: Node2D) -> void:
 		body.teste.emit()
 	
 
+func _on_radar_body_exited(body: Node2D) -> void:
+	#quando distancia for 0 ta se identificando
+	print('exited')
+	print((body.global_position.distance_to(global_position)))
+	print(body)
+	
+
 func on_colision():
 	$DisabledRadar.stop()
 	$DisabledRadar.start()
 	var radar: Area2D = $Radar
-	radar.scale = Vector2(0,0)
 	radar.hide()
 	#teste
 	radar.set_deferred("disabled", true) 

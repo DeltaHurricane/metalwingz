@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwwpbyho4tqlq"]
+[gd_scene load_steps=9 format=3 uid="uid://dwwpbyho4tqlq"]
 
 [ext_resource type="Script" path="res://ship/ship.gd" id="1_i3f1w"]
+[ext_resource type="Script" path="res://ship/radar.gd" id="2_lr2vt"]
 [ext_resource type="Texture2D" uid="uid://b7yjp8jelnsm7" path="res://assets/Fighter/Idle.png" id="3_1s5vt"]
 [ext_resource type="Texture2D" uid="uid://dmb08d2q1wgfb" path="res://assets/radarTeste.png" id="5_irpux"]
 
@@ -41,12 +42,12 @@ modulate = Color(0.87946, 0.119981, 0, 1)
 material = SubResource("CanvasItemMaterial_flok3")
 rotation = -1.5708
 collision_layer = 0
+script = ExtResource("2_lr2vt")
 metadata/_edit_group_ = true
 
 [node name="RadarColision" type="CollisionPolygon2D" parent="Radar"]
 modulate = Color(0.760586, 0.188894, 0.168392, 1)
-build_mode = 1
-polygon = PackedVector2Array(21, 0, 284, -19, 315, 0, 284, 19)
+polygon = PackedVector2Array(22, 7.96398e-05, 279, -18.999, 320, 0.0011584, 278, 20.001)
 
 [node name="Sprite2D" type="Sprite2D" parent="Radar"]
 modulate = Color(1, 1, 1, 0.490196)
@@ -71,4 +72,5 @@ frame_progress = 0.64123
 one_shot = true
 
 [connection signal="body_entered" from="Radar" to="." method="_on_radar_body_entered"]
+[connection signal="body_exited" from="Radar" to="." method="_on_radar_body_exited"]
 [connection signal="timeout" from="DisabledRadar" to="." method="_on_disabled_radar_timeout"]
