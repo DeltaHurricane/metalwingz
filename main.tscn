@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dyx0m3biyrglv"]
 
-[ext_resource type="PackedScene" uid="uid://dwwpbyho4tqlq" path="res://ship/ship.tscn" id="1_boylg"]
-[ext_resource type="PackedScene" uid="uid://cs4jd4520axrw" path="res://testShip/testShip.tscn" id="2_3rkel"]
+[ext_resource type="PackedScene" uid="uid://dwwpbyho4tqlq" path="res://scenes/ship/ship.tscn" id="1_boylg"]
+[ext_resource type="PackedScene" uid="uid://cs4jd4520axrw" path="res://scenes/testShip/testShip.tscn" id="2_3rkel"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grvg7"]
 
