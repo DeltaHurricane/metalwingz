@@ -4,12 +4,15 @@ signal start_dmg(body: Node2D)
 signal stop_dmg(body: Node2D)
 
 @export var health:int = 10
+@export var radarHeight:float = 1.0
+@export var radarWidth:float = 1.0
 @export var max_speed:int = 200 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	on_colision() #começar sem o radar
+	pass
+	#on_colision() #começar sem o radar
 	
 
 func _process(delta: float) -> void:
@@ -44,7 +47,6 @@ func hit():
 
 
 func _on_radar_body_entered(body: Node2D) -> void:
-	if(body != self):
 		print('entrou')
 		start_dmg.emit(body)
 		#print((body.global_position.distance_to(global_position)))
@@ -56,29 +58,11 @@ func _on_radar_body_entered(body: Node2D) -> void:
 
 func _on_radar_body_exited(body: Node2D) -> void:
 	#quando distancia for 0 ta se identificando
-	if(body != self):
 		print('exited')
 		stop_dmg.emit(body)
 		#print((body.global_position.distance_to(global_position)))
 		#print(body)
 	
 
-func on_colision():
-	$DisabledRadar.stop()
-	$DisabledRadar.start()
-	var radar: Area2D = $Radar
-	radar.scale = Vector2(0,0)
-	radar.hide()
-	radar.set_deferred("disabled", true) 
-
-	
-
-
-func _on_disabled_radar_timeout() -> void:
-	var radar: Area2D = $Radar
-	radar.scale = Vector2(0,0)
-	radar.show()
-	var tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_LINEAR)
-	tween.tween_property(radar, "scale", Vector2(1,1),2)
-	radar.set_deferred("disabled", false)
-	
+func on_colision(): 
+	$Radar.disable_radar()
