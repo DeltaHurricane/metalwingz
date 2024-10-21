@@ -29,9 +29,11 @@ physics_material_override = SubResource("PhysicsMaterial_itcvl")
 center_of_mass_mode = 1
 contact_monitor = true
 max_contacts_reported = 2
-linear_damp = 4.0
-angular_damp = 2.0
+linear_damp = 0.5
+angular_damp = 1.5
 script = ExtResource("1_i3f1w")
+max_speed = 300
+metadata/_edit_group_ = true
 
 [node name="ShipBodyColision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
@@ -47,5 +49,10 @@ frame_progress = 0.64123
 [node name="Radar" parent="." instance=ExtResource("3_dej3v")]
 position = Vector2(0, -18)
 
+[node name="NextMove" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
 [connection signal="body_entered" from="Radar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="Radar" to="." method="_on_radar_body_exited"]
+[connection signal="timeout" from="NextMove" to="." method="_on_next_move_timeout"]
