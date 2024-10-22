@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dwwpbyho4tqlq" path="res://scenes/ship/ship.tscn" id="1_boylg"]
 [ext_resource type="PackedScene" uid="uid://cs4jd4520axrw" path="res://scenes/testShip/testShip.tscn" id="2_3rkel"]
-[ext_resource type="Script" path="res://label.gd" id="2_aip61"]
-[ext_resource type="PackedScene" uid="uid://be3qcxgad5euq" path="res://mundo.tscn" id="3_vs3sm"]
+[ext_resource type="Script" path="res://scenes/testScene/label.gd" id="2_aip61"]
+[ext_resource type="PackedScene" uid="uid://be3qcxgad5euq" path="res://scenes/WorldBoundary/mundo.tscn" id="3_vs3sm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_grvg7"]
 

@@ -101,7 +101,7 @@ func _on_next_move_timeout() -> void:
 		current_move = ShipMove.create(ShipMove.Moves.RETO)
 	
 func add_move(move_obj:ShipMove):
-	if move_obj != null:
+	if move_obj != null && move_list.size() < 4:
 		move_list.append(move_obj)
 
 
