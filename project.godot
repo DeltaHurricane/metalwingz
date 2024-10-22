@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="MetalWingz"
-run/main_scene="res://main.tscn"
+run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://assets/Fighter/Idle.png"
 
 [autoload]
 
-Signals="*res://signals.gd"
+Signals="*res://signalsAutoload.gd"
 
 [debug]
 
@@ -31,7 +31,6 @@ gdscript/warnings/unsafe_call_argument=1
 
 window/size/viewport_width=600
 window/size/viewport_height=400
-window/size/mode=3
 
 [editor]
 
