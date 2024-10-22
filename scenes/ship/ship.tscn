@@ -53,6 +53,10 @@ position = Vector2(0, -18)
 wait_time = 1.5
 autostart = true
 
+[node name="ColisionImunity" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="Radar" to="." method="_on_radar_body_entered"]
 [connection signal="body_exited" from="Radar" to="." method="_on_radar_body_exited"]
 [connection signal="timeout" from="NextMove" to="." method="_on_next_move_timeout"]
+[connection signal="timeout" from="ColisionImunity" to="." method="_on_colision_imunity_timeout"]
