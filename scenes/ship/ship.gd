@@ -4,15 +4,20 @@ class_name Ship
 signal start_dmg(body: Node2D)
 signal stop_dmg(body: Node2D)
 signal dead(name: String)
+signal change_ship_hp(new_hp: float)
+signal change_moves(moves: Array[ShipMove])
 
 var move_list: Array[ShipMove] = []
+var current_move: ShipMove = ShipMove.create(ShipMove.Moves.RETO)
+var colisionImunity: bool = false
+var colision_damage: float = 0.3
+var max_moves: int = 4
 
-@export var health:float = 3
+@export var player_index: int = 0
+@export var health:float = 3.0
 @export var radarHeight:float = 0.9
 @export var radarWidth:float = 1.0
 @export var max_speed:int = 200 # How fast the player will move (pixels/sec).
-var screen_size: int # Size of the game window.
-var current_move: ShipMove = ShipMove.create(ShipMove.Moves.RETO)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,11 +26,11 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	apply_impulse(Vector2.UP.rotated(rotation) * current_move.move[ShipMove.Dir.FORCE]  * delta)
+	apply_central_impulse(Vector2(Vector2.UP.rotated(rotation) * current_move.move[ShipMove.Dir.FORCE]  * delta))
 	apply_torque_impulse(current_move.move[ShipMove.Dir.TORQUE]  * delta)
 	var colision: int = get_contact_count()
-	if(colision != 0):
-		on_colision()
+	if(colision != 0 && colisionImunity == false):
+		on_colision(get_colliding_bodies())
 		#print(colision)
 		#print(get_colliding_bodies())
 		#print(linear_velocity)
@@ -40,6 +45,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	
 func hit(dano: float) -> void:
 	health -= dano
+	AutoloadedSignals.change_ship_hp.emit(player_index,health)
 
 
 func _on_radar_body_entered(body: Node2D) -> void:
@@ -57,9 +63,23 @@ func _on_radar_body_exited(body: Node2D) -> void:
 		#print(body)
 	
 
-func on_colision() -> void: 
+func on_colision(colisionBodies: Array[Node2D]) -> void: 
 	var radar: Radar = $Radar
 	radar.disable_radar()
+	
+	var recieving_colision_damage = 0.0
+	var is_valid_colision = false
+
+	for objeto in colisionBodies:
+		if objeto is Ship:
+			recieving_colision_damage = objeto.colision_damage
+			is_valid_colision = true
+			break
+				
+	if(is_valid_colision):
+		colisionImunity = true
+		hit(recieving_colision_damage)
+		$ColisionImunity.start()
 
 
 func get_move() -> ShipMove:
@@ -80,47 +100,64 @@ func get_secondary_move() -> ShipMove:
 		return ShipMove.create(ShipMove.Moves.CURVE_LEFT)
 	if Input.is_action_pressed("move_down"):
 		move_list = []
+		change_moves.emit(move_list)
 		return null
 	if Input.is_action_pressed("move_up"):
 		return ShipMove.create(ShipMove.Moves.RETO_LONGO)
 	return null
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.shift_pressed:
-			add_move(get_secondary_move())
-		else:
-			add_move(get_move())
-
+func _unhandled_input(event: InputEvent) -> void:
+	if player_index == 0:
+		if event is InputEventKey and event.pressed:
+			if event.shift_pressed:
+				add_move(get_secondary_move())
+			else:
+				add_move(get_move())
+	else:
+		if event is InputEventJoypadButton and event.pressed:
+			if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_A):
+				add_move(get_secondary_move2())
+			else:
+				add_move(get_move2())
+			
 
 func _on_next_move_timeout() -> void:
 	if(move_list.size() > 0):
 		current_move = move_list.pop_front()
+		change_moves.emit(move_list)
 	else:
 		current_move = ShipMove.create(ShipMove.Moves.RETO)
 	
-func add_move(move_obj:ShipMove):
-	if move_obj != null && move_list.size() < 4:
+func add_move(move_obj:ShipMove) -> void:
+	if move_obj != null && move_list.size() < max_moves:
 		move_list.append(move_obj)
+		change_moves.emit(move_list)
+
+func get_move2() -> ShipMove:
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_RIGHT):
+		return ShipMove.create(ShipMove.Moves.SMALL_CURVE_RIGHT)
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_LEFT):
+		return ShipMove.create(ShipMove.Moves.SMALL_CURVE_LEFT)
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_DOWN):
+		return ShipMove.create(ShipMove.Moves.STOP)
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_UP):
+		return ShipMove.create(ShipMove.Moves.RETO)
+	return null
+
+func get_secondary_move2() -> ShipMove:
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_RIGHT):
+		return ShipMove.create(ShipMove.Moves.CURVE_RIGHT)
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_LEFT):
+		return ShipMove.create(ShipMove.Moves.CURVE_LEFT)
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_DOWN):
+		move_list = []
+		change_moves.emit(move_list)
+		return null
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_UP):
+		return ShipMove.create(ShipMove.Moves.RETO_LONGO)
+	return null
 
 
-func old_movimentos():
-	pass
-		#var impulse:int = 0
-	#var torque:int = 0
-	#if Input.is_action_pressed("move_right"):
-		#torque = 500
-	#if Input.is_action_pressed("move_left"):
-		#torque = -500
-	#if Input.is_action_pressed("move_down"):
-		#impulse = -1000
-		##add_constant_force(Vector2.UP.rotated(rotation) * impulse  * delta)
-	#if Input.is_action_pressed("move_up"):
-		#impulse = 1000
-		##add_constant_central_force(Vector2.UP.rotated(rotation) * impulse )
-		#
-	#apply_impulse(Vector2.UP.rotated(rotation) * impulse  * delta)
-	#apply_torque_impulse(torque  * delta)
-	
-	
+func _on_colision_imunity_timeout() -> void:
+	colisionImunity = false

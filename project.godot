@@ -17,7 +17,7 @@ config/icon="res://assets/Fighter/Idle.png"
 
 [autoload]
 
-Signals="*res://signalsAutoload.gd"
+AutoloadedSignals="*res://SignalsAutoload.gd"
 
 [debug]
 

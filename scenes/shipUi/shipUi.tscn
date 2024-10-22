@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://caytjbtoc4drw"]
+
+[ext_resource type="Script" path="res://scenes/shipUi/ship_ui.gd" id="1_bpse2"]
+[ext_resource type="Texture2D" uid="uid://bpegj7mh28v4x" path="res://assets/HP/row-3-column-1.png" id="1_dqmyv"]
+[ext_resource type="Texture2D" uid="uid://y7cpg13og2w5" path="res://assets/HP/row-1-column-2 (4).png" id="2_7yawy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4gw08"]
+font_size = 15
+font_color = Color(0.624973, 0.699478, 0.960282, 1)
+
+[node name="ShipUi" type="Node2D"]
+modulate = Color(1, 1, 1, 0.607843)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_bpse2")
+
+[node name="Border" type="Sprite2D" parent="."]
+position = Vector2(-1, -0.5)
+scale = Vector2(1.25, 1.8125)
+texture = ExtResource("1_dqmyv")
+region_filter_clip_enabled = true
+metadata/_edit_group_ = true
+
+[node name="HpBarMask" type="Sprite2D" parent="Border"]
+clip_children = 1
+position = Vector2(-0.694532, 0.275862)
+scale = Vector2(1.25421, 0.676185)
+texture = ExtResource("2_7yawy")
+
+[node name="HpBar" type="Sprite2D" parent="Border/HpBarMask"]
+modulate = Color(0.388631, 0.59719, 0.335936, 1)
+position = Vector2(-0.0840893, -0.40797)
+scale = Vector2(1.02315, 1.36693)
+texture = ExtResource("2_7yawy")
+
+[node name="HpLabel" type="Label" parent="."]
+offset_left = -22.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 11.0
+text = "3%"
+label_settings = SubResource("LabelSettings_4gw08")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Player" type="Label" parent="."]
+offset_left = -75.0
+offset_top = -11.0
+offset_right = -35.0
+offset_bottom = 12.0
+horizontal_alignment = 2
+
+[node name="MovementContainer" type="HBoxContainer" parent="."]
+clip_contents = true
+layout_direction = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.6667
+offset_top = 19.3333
+offset_right = 65.3333
+offset_bottom = 58.3333
+grow_horizontal = 2
+grow_vertical = 2

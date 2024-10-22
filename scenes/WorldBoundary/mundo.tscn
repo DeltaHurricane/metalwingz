@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://be3qcxgad5euq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jm5ds"]
-distance = -400.0
+distance = -1080.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ai8xl"]
 normal = Vector2(-1, 0)
-distance = -600.0
+distance = -1920.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nak0w"]
 normal = Vector2(0, 1)

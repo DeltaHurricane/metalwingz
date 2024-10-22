@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyx0m3biyrglv"]
+[gd_scene load_steps=12 format=3 uid="uid://dyx0m3biyrglv"]
 
 [ext_resource type="PackedScene" uid="uid://dwwpbyho4tqlq" path="res://scenes/ship/ship.tscn" id="1_boylg"]
+[ext_resource type="Script" path="res://scenes/testScene/main.gd" id="1_o8qfq"]
 [ext_resource type="PackedScene" uid="uid://cs4jd4520axrw" path="res://scenes/testShip/testShip.tscn" id="2_3rkel"]
 [ext_resource type="Script" path="res://scenes/testScene/label.gd" id="2_aip61"]
 [ext_resource type="PackedScene" uid="uid://be3qcxgad5euq" path="res://scenes/WorldBoundary/mundo.tscn" id="3_vs3sm"]
@@ -22,12 +23,18 @@ bounce = 0.8
 [sub_resource type="SpriteFrames" id="SpriteFrames_wrlej"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_o8qfq")
 
 [node name="Ship" parent="." instance=ExtResource("1_boylg")]
 position = Vector2(185, 168)
 rotation = 1.5708
 collision_layer = 1
 physics_material_override = SubResource("PhysicsMaterial_grvg7")
+linear_damp = 0.7
+player_index = 1
+radarHeight = 0.8
+radarWidth = 1.4
+max_speed = 250
 
 [node name="Label" type="Label" parent="."]
 offset_left = 16.0

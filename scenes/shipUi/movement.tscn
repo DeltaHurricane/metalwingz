@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://b4wnxvool2yxn"]
+
+[node name="Movement" type="Sprite2D"]
+position = Vector2(16, 16)
