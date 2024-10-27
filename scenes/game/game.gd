@@ -15,6 +15,7 @@ func _ready() -> void:
 		newShip.player_index = number
 		newShip.name = str(number)
 		newShip.position = Vector2(200*(number+1),(200*(number+1)))
+		newShip.rotation = randf() * 2 * PI
 		ships_array.append(newShip)
 		damage_obj[newShip.name] = 0
 		add_child(newShip)
@@ -22,7 +23,7 @@ func _ready() -> void:
 		var newHP: Ship_UI = ship_ui_scene.instantiate()
 		newHP.max_hp = newShip.health
 		newHP.ship_id = newShip.player_index
-		newHP.position = Vector2(100+(200*(newShip.player_index)),40)
+		newHP.position = Vector2(200+(200*(newShip.player_index)),40)
 		newHP.max_moves = newShip.max_moves
 		add_child(newHP)
 		
@@ -32,7 +33,8 @@ func _ready() -> void:
 		ship.start_dmg.connect(add_to_damage)
 		ship.stop_dmg.connect(remove_to_damage)
 		ship.dead.connect(remove_loosers)
-			
+	
+	$MoveTimer.play()
 	 
 
 func _process(delta: float) -> void:

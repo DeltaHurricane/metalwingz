@@ -8,7 +8,7 @@
 bounce = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tndx8"]
-radius = 8.0
+radius = 7.0
 height = 26.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jklch"]

@@ -22,7 +22,6 @@ var max_moves: int = 4
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
-	#on_colision() #começar sem o radar
 	
 
 func _process(delta: float) -> void:
@@ -47,7 +46,6 @@ func hit(dano: float) -> void:
 	health -= dano
 	AutoloadedSignals.change_ship_hp.emit(player_index,health)
 
-
 func _on_radar_body_entered(body: Node2D) -> void:
 		start_dmg.emit(body)
 		#print((body.global_position.distance_to(global_position)))
@@ -55,13 +53,11 @@ func _on_radar_body_entered(body: Node2D) -> void:
 		#print(body.has_signal('teste'))
 		#if(body.has_method('teste')):
 			#body.teste.emit()
-	
 
 func _on_radar_body_exited(body: Node2D) -> void:
 		stop_dmg.emit(body)
 		#print((body.global_position.distance_to(global_position)))
 		#print(body)
-	
 
 func on_colision(colisionBodies: Array[Node2D]) -> void: 
 	var radar: Radar = $Radar
@@ -71,7 +67,7 @@ func on_colision(colisionBodies: Array[Node2D]) -> void:
 	var is_valid_colision = false
 
 	for objeto in colisionBodies:
-		if objeto is Ship:
+		if 'colision_damage' in objeto && objeto.colision_damage > 0:
 			recieving_colision_damage = objeto.colision_damage
 			is_valid_colision = true
 			break
@@ -80,6 +76,44 @@ func on_colision(colisionBodies: Array[Node2D]) -> void:
 		colisionImunity = true
 		hit(recieving_colision_damage)
 		$ColisionImunity.start()
+		
+
+func _unhandled_input(event: InputEvent) -> void:
+	if player_index == 0:
+		if event is InputEventKey and event.pressed:
+			if Input.is_key_pressed(KEY_ALT):
+				add_move(get_special_move())
+				return
+			if event.shift_pressed:
+				add_move(get_secondary_move())
+			else:
+				add_move(get_move())
+	else:
+		if event is InputEventJoypadButton and event.pressed:
+			if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_B):
+				add_move(get_special_move2())
+				return
+			if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_A):
+				add_move(get_secondary_move2())
+			else:
+				add_move(get_move2())
+			
+
+func _on_next_move_timeout() -> void:
+	if(move_list.size() > 0):
+		current_move = move_list.pop_front() as ShipMove
+		if(current_move.move['type'] == ShipMove.MoveType.SPECIAL):
+			on_colision([])
+		change_moves.emit(move_list)
+	else:
+		current_move = ShipMove.create(ShipMove.Moves.RETO)
+	
+func add_move(move_obj:ShipMove) -> void:
+	if move_obj != null && move_list.size() < max_moves:
+		move_list.append(move_obj)
+		change_moves.emit(move_list)
+
+
 
 
 func get_move() -> ShipMove:
@@ -105,34 +139,15 @@ func get_secondary_move() -> ShipMove:
 	if Input.is_action_pressed("move_up"):
 		return ShipMove.create(ShipMove.Moves.RETO_LONGO)
 	return null
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if player_index == 0:
-		if event is InputEventKey and event.pressed:
-			if event.shift_pressed:
-				add_move(get_secondary_move())
-			else:
-				add_move(get_move())
-	else:
-		if event is InputEventJoypadButton and event.pressed:
-			if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_A):
-				add_move(get_secondary_move2())
-			else:
-				add_move(get_move2())
-			
-
-func _on_next_move_timeout() -> void:
-	if(move_list.size() > 0):
-		current_move = move_list.pop_front()
-		change_moves.emit(move_list)
-	else:
-		current_move = ShipMove.create(ShipMove.Moves.RETO)
 	
-func add_move(move_obj:ShipMove) -> void:
-	if move_obj != null && move_list.size() < max_moves:
-		move_list.append(move_obj)
-		change_moves.emit(move_list)
+func get_special_move() -> ShipMove:
+	if Input.is_action_pressed("move_right"):
+		return ShipMove.create(ShipMove.Moves.CENTO80_RIGHT)
+	if Input.is_action_pressed("move_left"):
+		return ShipMove.create(ShipMove.Moves.CENTO80_LEFT)
+	return null
+
+
 
 func get_move2() -> ShipMove:
 	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_RIGHT):
@@ -156,6 +171,13 @@ func get_secondary_move2() -> ShipMove:
 		return null
 	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_UP):
 		return ShipMove.create(ShipMove.Moves.RETO_LONGO)
+	return null
+
+func get_special_move2() -> ShipMove:
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_RIGHT):
+		return ShipMove.create(ShipMove.Moves.CENTO80_RIGHT)
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_LEFT):
+		return ShipMove.create(ShipMove.Moves.CENTO80_LEFT)
 	return null
 
 
