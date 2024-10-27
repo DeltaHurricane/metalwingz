@@ -39,3 +39,5 @@ func setMoves(moveList: Array[ShipMove]) -> void:
 			moves[i].texture = null
 	
 	
+func playTimer(moveTimer:float):
+	$MoveTimer.play(moveTimer)

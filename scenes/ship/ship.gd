@@ -6,12 +6,14 @@ signal stop_dmg(body: Node2D)
 signal dead(name: String)
 signal change_ship_hp(new_hp: float)
 signal change_moves(moves: Array[ShipMove])
+signal start_next_move(time: float)
 
 var move_list: Array[ShipMove] = []
 var current_move: ShipMove = ShipMove.create(ShipMove.Moves.RETO)
 var colisionImunity: bool = false
 var colision_damage: float = 0.3
-var max_moves: int = 4
+var max_moves: int = 1
+var next_move_ready: bool = true
 
 @export var player_index: int = 0
 @export var health:float = 3.0
@@ -25,6 +27,19 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	if(next_move_ready):
+		if(move_list.size() > 0):
+			next_move_ready = false
+			current_move = move_list.pop_front() as ShipMove
+			start_next_move.emit(current_move)
+			if(current_move.move['type'] == ShipMove.MoveType.SPECIAL):
+				on_colision([])
+			change_moves.emit(move_list)
+			start_next_move.emit(current_move.move['time'])
+			$NextMove.start(current_move.move['time'])
+		else:
+			current_move = ShipMove.create(ShipMove.Moves.RETO)
+	
 	apply_central_impulse(Vector2(Vector2.UP.rotated(rotation) * current_move.move[ShipMove.Dir.FORCE]  * delta))
 	apply_torque_impulse(current_move.move[ShipMove.Dir.TORQUE]  * delta)
 	var colision: int = get_contact_count()
@@ -100,13 +115,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 
 func _on_next_move_timeout() -> void:
-	if(move_list.size() > 0):
-		current_move = move_list.pop_front() as ShipMove
-		if(current_move.move['type'] == ShipMove.MoveType.SPECIAL):
-			on_colision([])
-		change_moves.emit(move_list)
-	else:
-		current_move = ShipMove.create(ShipMove.Moves.RETO)
+	next_move_ready = true
 	
 func add_move(move_obj:ShipMove) -> void:
 	if move_obj != null && move_list.size() < max_moves:

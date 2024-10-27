@@ -50,8 +50,7 @@ frame_progress = 0.64123
 position = Vector2(0, -18)
 
 [node name="NextMove" type="Timer" parent="."]
-wait_time = 1.5
-autostart = true
+one_shot = true
 
 [node name="ColisionImunity" type="Timer" parent="."]
 one_shot = true

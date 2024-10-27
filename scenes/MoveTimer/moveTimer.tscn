@@ -30,17 +30,19 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_krdyb")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
-"speed": 4.0
+"speed": 6.0
 }]
 
 [node name="MoveTimer" type="Sprite2D"]
-modulate = Color(1, 1, 1, 0.54902)
-clip_children = 1
+clip_children = 2
 scale = Vector2(3, 3)
 texture = ExtResource("1_wcsot")
 script = ExtResource("2_nqx4d")
 
 [node name="Timer" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_63awq")
+frame = 5
+
+[connection signal="animation_finished" from="Timer" to="." method="_on_timer_animation_finished"]
