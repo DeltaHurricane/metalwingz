@@ -28,13 +28,12 @@ func _ready() -> void:
 		add_child(newHP)
 		
 		newShip.change_moves.connect(newHP.setMoves)
+		newShip.start_next_move.connect(newHP.playTimer)
 		
 	for ship: Ship in ships_array:
 		ship.start_dmg.connect(add_to_damage)
 		ship.stop_dmg.connect(remove_to_damage)
 		ship.dead.connect(remove_loosers)
-	
-	$MoveTimer.play()
 	 
 
 func _process(delta: float) -> void:
