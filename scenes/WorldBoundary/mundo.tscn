@@ -1,4 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://be3qcxgad5euq"]
+[gd_scene load_steps=6 format=3 uid="uid://be3qcxgad5euq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cexju"]
+friction = 0.0
+bounce = 1.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jm5ds"]
 distance = -1080.0
@@ -16,6 +20,7 @@ normal = Vector2(1, 0)
 [node name="Mundo" type="StaticBody2D"]
 collision_layer = 4
 collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_cexju")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("WorldBoundaryShape2D_jm5ds")

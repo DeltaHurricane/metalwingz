@@ -31,7 +31,6 @@ rotation = 1.5708
 collision_layer = 1
 physics_material_override = SubResource("PhysicsMaterial_grvg7")
 linear_damp = 0.7
-player_index = 1
 radarHeight = 0.8
 radarWidth = 1.4
 max_speed = 250

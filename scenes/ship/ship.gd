@@ -14,6 +14,8 @@ var colisionImunity: bool = false
 var colision_damage: float = 0.3
 var max_moves: int = 1
 var next_move_ready: bool = true
+var curr_shield: Shields = null
+
 
 @export var player_index: int = 0
 @export var health:float = 3.0
@@ -21,34 +23,36 @@ var next_move_ready: bool = true
 @export var radarWidth:float = 1.0
 @export var max_speed:int = 200 # How fast the player will move (pixels/sec).
 
+var shield_object = preload("res://scenes/shields/shields.tscn")
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 	
 
 func _process(delta: float) -> void:
+
 	if(next_move_ready):
 		if(move_list.size() > 0):
 			next_move_ready = false
 			current_move = move_list.pop_front() as ShipMove
 			start_next_move.emit(current_move)
 			if(current_move.move['type'] == ShipMove.MoveType.SPECIAL):
-				on_colision([])
+				disableRadar(current_move.move['time'])
+				var special_function = current_move.move.get('func')
+				if(special_function && self.has_method(special_function)):
+					Callable(self, special_function).call(current_move.move['time'])
+						
 			change_moves.emit(move_list)
 			start_next_move.emit(current_move.move['time'])
 			$NextMove.start(current_move.move['time'])
 		else:
-			current_move = ShipMove.create(ShipMove.Moves.RETO)
+			current_move = ShipMove.create(ShipMove.Moves.STOP)
 	
 	apply_central_impulse(Vector2(Vector2.UP.rotated(rotation) * current_move.move[ShipMove.Dir.FORCE]  * delta))
 	apply_torque_impulse(current_move.move[ShipMove.Dir.TORQUE]  * delta)
-	var colision: int = get_contact_count()
-	if(colision != 0 && colisionImunity == false):
-		on_colision(get_colliding_bodies())
-		#print(colision)
-		#print(get_colliding_bodies())
-		#print(linear_velocity)
-		#print(rad_to_deg(rotation))
+	
 	if(health <= 0):
 		dead.emit(self.name)
 		queue_free()
@@ -61,6 +65,21 @@ func hit(dano: float) -> void:
 	health -= dano
 	AutoloadedSignals.change_ship_hp.emit(player_index,health)
 
+func shields(activationTime:float):
+	lock_rotation = true
+	var newShield: Shields = shield_object.instantiate()
+	add_child(newShield)
+	newShield.activate(activationTime)
+	newShield.remove.connect(removeShield)
+	
+	
+func removeShield():
+	lock_rotation = false
+	if(curr_shield):
+		curr_shield.queue_free()
+		curr_shield = null
+	
+	
 func _on_radar_body_entered(body: Node2D) -> void:
 		start_dmg.emit(body)
 		#print((body.global_position.distance_to(global_position)))
@@ -74,22 +93,16 @@ func _on_radar_body_exited(body: Node2D) -> void:
 		#print((body.global_position.distance_to(global_position)))
 		#print(body)
 
-func on_colision(colisionBodies: Array[Node2D]) -> void: 
+func disableRadar(time:float) -> void:
 	var radar: Radar = $Radar
-	radar.disable_radar()
-	
-	var recieving_colision_damage = 0.0
-	var is_valid_colision = false
+	radar.disable_radar(time)
 
-	for objeto in colisionBodies:
-		if 'colision_damage' in objeto && objeto.colision_damage > 0:
-			recieving_colision_damage = objeto.colision_damage
-			is_valid_colision = true
-			break
-				
-	if(is_valid_colision):
+func on_colision(damage: float) -> void: 
+	disableRadar(2.0)
+
+	if(colisionImunity == false):
 		colisionImunity = true
-		hit(recieving_colision_damage)
+		hit(damage)
 		$ColisionImunity.start()
 		
 
@@ -154,6 +167,8 @@ func get_special_move() -> ShipMove:
 		return ShipMove.create(ShipMove.Moves.CENTO80_RIGHT)
 	if Input.is_action_pressed("move_left"):
 		return ShipMove.create(ShipMove.Moves.CENTO80_LEFT)
+	if Input.is_action_pressed("move_up"):
+		return ShipMove.create(ShipMove.Moves.RAM)
 	return null
 
 
@@ -187,6 +202,8 @@ func get_special_move2() -> ShipMove:
 		return ShipMove.create(ShipMove.Moves.CENTO80_RIGHT)
 	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_LEFT):
 		return ShipMove.create(ShipMove.Moves.CENTO80_LEFT)
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_UP):
+		return ShipMove.create(ShipMove.Moves.RAM)
 	return null
 
 
