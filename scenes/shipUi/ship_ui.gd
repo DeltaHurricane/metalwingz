@@ -24,6 +24,8 @@ func _ready() -> void:
 
 func setHp(player_id:int,hp:float) -> void:
 	var curr_hp = round(hp*100.0/max_hp)
+	if(curr_hp<0):
+		curr_hp = 0
 	if(player_id == ship_id):
 		current_hp = str(curr_hp)+'%'
 		$HpLabel.text = current_hp
