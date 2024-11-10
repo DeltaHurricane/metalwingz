@@ -14,7 +14,8 @@ enum Moves {
 	STOP,
 	CENTO80_RIGHT,
 	CENTO80_LEFT,
-	RAM
+	RAM,
+	GRANADE
 }
 
 enum Dir {TORQUE, FORCE}
@@ -30,6 +31,7 @@ static var back: Resource = preload("res://assets/Arrows/blue_back.png")
 static var right_180: Resource = preload("res://assets/Arrows/red_180_right.png")
 static var left_180: Resource = preload("res://assets/Arrows/red_180_left.png")
 static var ram: Resource = preload("res://assets/Arrows/blue_forward.png")
+static var granada: Resource = preload("res://assets/Explosions/Fire/Fire3.png")
 
 
 static var min_force:int = 50
@@ -48,7 +50,8 @@ static var move_list: Dictionary = {
 	ShipMove.Moves.STOP: {'time':1.0,'type': ShipMove.MoveType.NORMAL,ShipMove.Dir.TORQUE:0, ShipMove.Dir.FORCE: -min_force,'sprite':back },
 	ShipMove.Moves.CENTO80_RIGHT: {'time':1.5,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:475, ShipMove.Dir.FORCE: medium_force,'sprite':right_180 },
 	ShipMove.Moves.CENTO80_LEFT: {'time':1.5,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:-475, ShipMove.Dir.FORCE: medium_force,'sprite':left_180 },
-	ShipMove.Moves.RAM: {'time':2.5,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:0, ShipMove.Dir.FORCE: strong_force,'sprite':ram, 'func':'shields' }
+	ShipMove.Moves.RAM: {'time':2.5,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:0, ShipMove.Dir.FORCE: strong_force,'sprite':ram, 'func':'shields' },
+	ShipMove.Moves.GRANADE:{'time':2.0,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:0, ShipMove.Dir.FORCE: 150,'sprite':ram, 'func':'granada' }
 }
 
 static func create(move_name: Moves) -> ShipMove:

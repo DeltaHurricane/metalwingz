@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://egcqoha7bkfg"]
+[gd_scene load_steps=3 format=3 uid="uid://egcqoha7bkfg"]
 
 [ext_resource type="Script" path="res://scenes/shields/shields.gd" id="1_wu21i"]
+[ext_resource type="PackedScene" uid="uid://dcd8guk1qivr4" path="res://scenes/colisao/daDanoDeColisao.tscn" id="2_uwghl"]
 
 [node name="Shields" type="Area2D"]
 collision_layer = 4
@@ -16,6 +17,10 @@ visibility_layer = 5
 position = Vector2(0, 5)
 build_mode = 1
 polygon = PackedVector2Array(42, -3, 0, -20, -40, -3, 0, -7)
+
+[node name="DaDanoDeColisao" parent="." node_paths=PackedStringArray("nodeColisor") instance=ExtResource("2_uwghl")]
+colision_damage = 1.0
+nodeColisor = NodePath("..")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="ActiveTimer" to="." method="_on_active_timer_timeout"]

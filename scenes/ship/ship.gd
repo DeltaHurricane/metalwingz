@@ -11,7 +11,7 @@ signal start_next_move(time: float)
 var move_list: Array[ShipMove] = []
 var current_move: ShipMove = ShipMove.create(ShipMove.Moves.RETO)
 var colisionImunity: bool = false
-var colision_damage: float = 0.3
+
 var max_moves: int = 1
 var next_move_ready: bool = true
 var curr_shield: Shields = null
@@ -24,7 +24,7 @@ var curr_shield: Shields = null
 @export var max_speed:int = 200 # How fast the player will move (pixels/sec).
 
 var shield_object = preload("res://scenes/shields/shields.tscn")
-
+var granada_object = preload("res://scenes/granada/granada.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,7 +32,7 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-
+	disableRadar(1)
 	if(next_move_ready):
 		if(move_list.size() > 0):
 			next_move_ready = false
@@ -64,6 +64,11 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 func hit(dano: float) -> void:
 	health -= dano
 	AutoloadedSignals.change_ship_hp.emit(player_index,health)
+
+func granada(_activationTime:float):
+	var newGranada: Granada = granada_object.instantiate()
+	newGranada.position = self.position + (Vector2.UP.rotated(rotation) * Vector2(0,-12))
+	get_parent().add_child(newGranada)
 
 func shields(activationTime:float):
 	lock_rotation = true
@@ -169,6 +174,8 @@ func get_special_move() -> ShipMove:
 		return ShipMove.create(ShipMove.Moves.CENTO80_LEFT)
 	if Input.is_action_pressed("move_up"):
 		return ShipMove.create(ShipMove.Moves.RAM)
+	if Input.is_action_pressed("move_down"):
+		return ShipMove.create(ShipMove.Moves.GRANADE)
 	return null
 
 
@@ -204,6 +211,8 @@ func get_special_move2() -> ShipMove:
 		return ShipMove.create(ShipMove.Moves.CENTO80_LEFT)
 	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_UP):
 		return ShipMove.create(ShipMove.Moves.RAM)
+	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_DOWN):
+		return ShipMove.create(ShipMove.Moves.GRANADE)
 	return null
 
 

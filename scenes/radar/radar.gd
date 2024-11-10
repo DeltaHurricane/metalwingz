@@ -22,7 +22,7 @@ func disable_radar(disabledTime:float):
 	$DisabledRadar.start(disabledTime)
 	scale = Vector2(0,0)
 	hide()
-	set_deferred("disabled", true) 
+	$RadarColision.set_deferred("disabled", true) 
 
 	
 func _on_disabled_radar_timeout() -> void:
@@ -30,5 +30,5 @@ func _on_disabled_radar_timeout() -> void:
 	show()
 	var tween: Tween = get_tree().create_tween().bind_node(self).set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(self, "scale", Vector2(height,width),0.9)
-	set_deferred("disabled", false)
+	$RadarColision.set_deferred("disabled", false)
 	
