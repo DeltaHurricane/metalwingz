@@ -6,7 +6,6 @@ var shield = preload("res://scenes/shields/shields_body.tscn")
 
 signal remove()
 
-var colision_damage: float = 1.0
 var parent = null
 var current_shield = null
 
@@ -37,8 +36,3 @@ func removeShield():
 	if(current_shield):
 		current_shield.queue_free()
 		current_shield = null
-
-
-func _on_body_entered(body: Node2D) -> void:
-	if(body && body.has_method('on_colision')):
-		Callable(body, 'on_colision').call(colision_damage)

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://l2npmxwb5an2"
-path="res://.godot/imported/Circle_explosion1.png-4f6f3da861a9c7d87fa2007ea598772d.ctex"
+path="res://.godot/imported/Circle_explosion1.png-615e4e6a893dd17098b1c2c1c55536e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Explosions/Circle_explosion/Circle_explosion1.png"
-dest_files=["res://.godot/imported/Circle_explosion1.png-4f6f3da861a9c7d87fa2007ea598772d.ctex"]
+source_file="res://assets/Circle_explosion1.png"
+dest_files=["res://.godot/imported/Circle_explosion1.png-615e4e6a893dd17098b1c2c1c55536e6.ctex"]
 
 [params]
 
