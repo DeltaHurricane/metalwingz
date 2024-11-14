@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://be3qcxgad5euq"]
+[gd_scene load_steps=7 format=3 uid="uid://be3qcxgad5euq"]
+
+[ext_resource type="PackedScene" uid="uid://dcd8guk1qivr4" path="res://scenes/colisao/daDanoDeColisao.tscn" id="1_xonw4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cexju"]
 friction = 0.0
@@ -17,10 +19,29 @@ normal = Vector2(0, 1)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yrl4e"]
 normal = Vector2(1, 0)
 
-[node name="Mundo" type="StaticBody2D"]
+[node name="Area2D" type="Area2D"]
+priority = 2
+
+[node name="Mundo" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_cexju")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mundo"]
+shape = SubResource("WorldBoundaryShape2D_jm5ds")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Mundo"]
+shape = SubResource("WorldBoundaryShape2D_ai8xl")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Mundo"]
+shape = SubResource("WorldBoundaryShape2D_nak0w")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Mundo"]
+shape = SubResource("WorldBoundaryShape2D_yrl4e")
+
+[node name="DaDanoDeColisao" parent="." node_paths=PackedStringArray("nodeColisor") instance=ExtResource("1_xonw4")]
+colision_damage = 0.0
+nodeColisor = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("WorldBoundaryShape2D_jm5ds")

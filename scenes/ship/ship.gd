@@ -19,8 +19,8 @@ var curr_shield: Shields = null
 
 @export var player_index: int = 0
 @export var health:float = 3.0
-@export var radarHeight:float = 0.9
-@export var radarWidth:float = 1.0
+@export var radarHeight:float = 0.4
+@export var radarWidth:float = 0.8
 @export var max_speed:int = 200 # How fast the player will move (pixels/sec).
 
 var shield_object = preload("res://scenes/shields/shields.tscn")
@@ -32,7 +32,6 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	disableRadar(1)
 	if(next_move_ready):
 		if(move_list.size() > 0):
 			next_move_ready = false
