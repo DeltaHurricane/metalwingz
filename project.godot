@@ -63,7 +63,9 @@ move_down={
 [layer_names]
 
 2d_physics/layer_1="player"
+2d_physics/layer_2="Shield"
 2d_physics/layer_3="wall"
+2d_physics/layer_4="Asteroid"
 
 [physics]
 

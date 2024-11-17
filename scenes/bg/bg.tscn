@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://qyspuc3ath41"]
+
+[ext_resource type="Texture2D" uid="uid://17u3wlh4x2ld" path="res://assets/Background/Condesed/Starry background  - Layer 01 - Void.png" id="1_f6s3n"]
+[ext_resource type="Shader" path="res://scenes/bg/stars.gdshader" id="2_jpy1v"]
+[ext_resource type="Texture2D" uid="uid://di2cbiss05dxe" path="res://assets/Background/Split up/Starry background  - Layer 03 - Stars.png" id="2_k6smu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_43dlq"]
+shader = ExtResource("2_jpy1v")
+
+[node name="Bg" type="ParallaxBackground"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(5760, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+modulate = Color(0.627451, 0.929412, 0.52549, 1)
+texture_repeat = 2
+texture = ExtResource("1_f6s3n")
+centered = false
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/Sprite2D"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_43dlq")
+texture = ExtResource("2_k6smu")
+centered = false

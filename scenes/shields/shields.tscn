@@ -4,7 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dcd8guk1qivr4" path="res://scenes/colisao/daDanoDeColisao.tscn" id="2_uwghl"]
 
 [node name="Shields" type="Area2D"]
-collision_layer = 4
+collision_layer = 2
+collision_mask = 9
 priority = 1
 script = ExtResource("1_wu21i")
 

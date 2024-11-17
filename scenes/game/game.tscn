@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bh8ulkrbec0i6"]
+[gd_scene load_steps=6 format=3 uid="uid://bh8ulkrbec0i6"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_1c3uw"]
 [ext_resource type="PackedScene" uid="uid://be3qcxgad5euq" path="res://scenes/WorldBoundary/mundo.tscn" id="1_f1klu"]
 [ext_resource type="PackedScene" uid="uid://ti1aeqxbvpnb" path="res://scenes/granada/granada.tscn" id="3_coqvj"]
+[ext_resource type="PackedScene" uid="uid://qyspuc3ath41" path="res://scenes/bg/bg.tscn" id="4_6wrfq"]
+[ext_resource type="PackedScene" uid="uid://ub5d0iuyvmqw" path="res://scenes/Asteroids/Asteroid.tscn" id="5_8jsl1"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_1c3uw")
@@ -16,4 +18,9 @@ offset_bottom = 23.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Granada" parent="." instance=ExtResource("3_coqvj")]
-position = Vector2(290, 201)
+position = Vector2(377, 234)
+
+[node name="Bg" parent="." instance=ExtResource("4_6wrfq")]
+
+[node name="Asteroid" parent="." instance=ExtResource("5_8jsl1")]
+position = Vector2(425, 184)

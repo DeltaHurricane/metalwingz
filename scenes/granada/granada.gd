@@ -54,6 +54,8 @@ func explode():
 		self.set_collision_layer_value(3, false)
 		self.set_collision_layer_value(1, false)
 		self.set_collision_mask_value(3, false)
+		self.set_collision_mask_value(2, false)
+		self.set_collision_mask_value(4, false)
 		exploded = true
 		$Explosao.visible = true
 		$GranadaInerte.visible = false

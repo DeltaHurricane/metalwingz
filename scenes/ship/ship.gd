@@ -104,7 +104,7 @@ func disableRadar(time:float) -> void:
 func on_colision(damage: float) -> void: 
 	disableRadar(2.0)
 
-	if(colisionImunity == false):
+	if(colisionImunity == false and damage > 0):
 		colisionImunity = true
 		hit(damage)
 		$ColisionImunity.start()
