@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://caytjbtoc4drw"]
+[gd_scene load_steps=7 format=3 uid="uid://caytjbtoc4drw"]
 
 [ext_resource type="Script" path="res://scenes/shipUi/ship_ui.gd" id="1_bpse2"]
 [ext_resource type="Texture2D" uid="uid://bpegj7mh28v4x" path="res://assets/HP/row-3-column-1.png" id="1_dqmyv"]
 [ext_resource type="Texture2D" uid="uid://y7cpg13og2w5" path="res://assets/HP/row-1-column-2 (4).png" id="2_7yawy"]
 [ext_resource type="PackedScene" uid="uid://cwugfjnjplo0v" path="res://scenes/shipUi/MoveTimer/moveTimer.tscn" id="2_pea8a"]
+[ext_resource type="Texture2D" uid="uid://5ex51idc4rq2" path="res://assets/Generico/All.png" id="5_fqlyp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4gw08"]
 font_size = 15
@@ -15,7 +16,8 @@ scale = Vector2(1.5, 1.5)
 script = ExtResource("1_bpse2")
 
 [node name="MoveTimer" parent="." instance=ExtResource("2_pea8a")]
-position = Vector2(-76, 20)
+position = Vector2(26, 33.3333)
+rotation = 1.5708
 
 [node name="Border" type="Sprite2D" parent="."]
 position = Vector2(-1, -0.5)
@@ -53,15 +55,15 @@ offset_right = -35.0
 offset_bottom = 12.0
 horizontal_alignment = 2
 
-[node name="MovementContainer" type="HBoxContainer" parent="."]
-clip_contents = true
-layout_direction = 2
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -64.6667
-offset_top = 19.3333
-offset_right = 65.3333
-offset_bottom = 58.3333
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MovementContainer" type="Sprite2D" parent="."]
+position = Vector2(47.9565, -2.81906)
+scale = Vector2(1.29036, 1.18489)
+texture = ExtResource("5_fqlyp")
+region_enabled = true
+region_rect = Rect2(1172.35, 178.706, 23.7201, 26.1198)
+
+[node name="Polygon2D" type="Polygon2D" parent="MovementContainer"]
+clip_children = 1
+polygon = PackedVector2Array(-7.19941, -6.62305, 7.78352, -6.62305, 7.78352, 8.00556, -7.19941, 8.00556)
+
+[node name="Movement" type="Sprite2D" parent="MovementContainer/Polygon2D"]

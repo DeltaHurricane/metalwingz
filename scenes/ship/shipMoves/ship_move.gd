@@ -21,17 +21,17 @@ enum Moves {
 enum Dir {TORQUE, FORCE}
 enum MoveType {SPECIAL, NORMAL}
 
-static var reto: Resource = preload("res://assets/Arrows/green_up.png")
-static var long_reto: Resource = preload("res://assets/Arrows/red_up.png")
-static var small_right: Resource = preload("res://assets/Arrows/green_up_right.png")
-static var small_left: Resource = preload("res://assets/Arrows/green_up_left.png")
-static var right: Resource = preload("res://assets/Arrows/red_up_right.png")
-static var left: Resource = preload("res://assets/Arrows/red_up_left.png")
-static var back: Resource = preload("res://assets/Arrows/blue_back.png")
-static var right_180: Resource = preload("res://assets/Arrows/red_180_right.png")
-static var left_180: Resource = preload("res://assets/Arrows/red_180_left.png")
-static var ram: Resource = preload("res://assets/Arrows/blue_forward.png")
-static var granada: Resource = preload("res://assets/Explosions/Fire/Fire3.png")
+static var reto: Texture2D = preload("res://assets/Arrows/green_up.png")
+static var long_reto: Texture2D = preload("res://assets/Arrows/red_up.png")
+static var small_right: Texture2D = preload("res://assets/Arrows/green_up_right.png")
+static var small_left: Texture2D = preload("res://assets/Arrows/green_up_left.png")
+static var right: Texture2D = preload("res://assets/Arrows/red_up_right.png")
+static var left: Texture2D = preload("res://assets/Arrows/red_up_left.png")
+static var back: Texture2D = preload("res://assets/Arrows/blue_back.png")
+static var right_180: Texture2D = preload("res://assets/Arrows/red_180_right.png")
+static var left_180: Texture2D = preload("res://assets/Arrows/red_180_left.png")
+static var ram: Texture2D = preload("res://assets/Arrows/blue_forward.png")
+static var granada: Texture2D = preload("res://assets/Explosions/Icons/Icon3.png")
 
 
 static var min_force:int = 50
@@ -51,7 +51,7 @@ static var move_list: Dictionary = {
 	ShipMove.Moves.CENTO80_RIGHT: {'time':1.5,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:475, ShipMove.Dir.FORCE: medium_force,'sprite':right_180 },
 	ShipMove.Moves.CENTO80_LEFT: {'time':1.5,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:-475, ShipMove.Dir.FORCE: medium_force,'sprite':left_180 },
 	ShipMove.Moves.RAM: {'time':2.5,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:0, ShipMove.Dir.FORCE: strong_force,'sprite':ram, 'func':'shields' },
-	ShipMove.Moves.GRANADE:{'time':2.0,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:0, ShipMove.Dir.FORCE: 150,'sprite':ram, 'func':'granada' }
+	ShipMove.Moves.GRANADE:{'time':2.0,'type': ShipMove.MoveType.SPECIAL,ShipMove.Dir.TORQUE:0, ShipMove.Dir.FORCE: 150,'sprite':granada, 'func':'granada' }
 }
 
 static func create(move_name: Moves) -> ShipMove:

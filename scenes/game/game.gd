@@ -24,7 +24,6 @@ func _ready() -> void:
 		newHP.max_hp = newShip.health
 		newHP.ship_id = newShip.player_index
 		newHP.position = Vector2(200+(200*(newShip.player_index)),40)
-		newHP.max_moves = newShip.max_moves
 		add_child(newHP)
 		
 		newShip.change_moves.connect(newHP.setMoves)

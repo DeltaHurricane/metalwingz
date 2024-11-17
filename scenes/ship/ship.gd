@@ -8,11 +8,9 @@ signal change_ship_hp(new_hp: float)
 signal change_moves(moves: Array[ShipMove])
 signal start_next_move(time: float)
 
-var move_list: Array[ShipMove] = []
 var current_move: ShipMove = ShipMove.create(ShipMove.Moves.RETO)
 var colisionImunity: bool = false
 
-var max_moves: int = 1
 var next_move_ready: bool = true
 var curr_shield: Shields = null
 
@@ -32,23 +30,6 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	if(next_move_ready):
-		if(move_list.size() > 0):
-			next_move_ready = false
-			current_move = move_list.pop_front() as ShipMove
-			start_next_move.emit(current_move)
-			if(current_move.move['type'] == ShipMove.MoveType.SPECIAL):
-				disableRadar(current_move.move['time'])
-				var special_function = current_move.move.get('func')
-				if(special_function && self.has_method(special_function)):
-					Callable(self, special_function).call(current_move.move['time'])
-						
-			change_moves.emit(move_list)
-			start_next_move.emit(current_move.move['time'])
-			$NextMove.start(current_move.move['time'])
-		else:
-			current_move = ShipMove.create(ShipMove.Moves.STOP)
-	
 	apply_central_impulse(Vector2(Vector2.UP.rotated(rotation) * current_move.move[ShipMove.Dir.FORCE]  * delta))
 	apply_torque_impulse(current_move.move[ShipMove.Dir.TORQUE]  * delta)
 	
@@ -111,33 +92,47 @@ func on_colision(damage: float) -> void:
 		
 
 func _unhandled_input(event: InputEvent) -> void:
-	if player_index == 0:
-		if event is InputEventKey and event.pressed:
-			if Input.is_key_pressed(KEY_ALT):
-				add_move(get_special_move())
-				return
-			if event.shift_pressed:
-				add_move(get_secondary_move())
-			else:
-				add_move(get_move())
-	else:
-		if event is InputEventJoypadButton and event.pressed:
-			if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_B):
-				add_move(get_special_move2())
-				return
-			if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_A):
-				add_move(get_secondary_move2())
-			else:
-				add_move(get_move2())
-			
+	if(next_move_ready):
+		if player_index == 0:
+			if event is InputEventKey and event.pressed:
+				if Input.is_key_pressed(KEY_ALT):
+					add_move(get_special_move())
+					return
+				if event.shift_pressed:
+					add_move(get_secondary_move())
+				else:
+					add_move(get_move())
+		else:
+			if event is InputEventJoypadButton and event.pressed:
+				if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_B):
+					add_move(get_special_move2())
+					return
+				if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_A):
+					add_move(get_secondary_move2())
+				else:
+					add_move(get_move2())
+				
 
 func _on_next_move_timeout() -> void:
 	next_move_ready = true
+	current_move = ShipMove.create(ShipMove.Moves.RETO)
+	change_moves.emit(null)
+	$ShipBody2/ColldownSprite.hide()
 	
 func add_move(move_obj:ShipMove) -> void:
-	if move_obj != null && move_list.size() < max_moves:
-		move_list.append(move_obj)
-		change_moves.emit(move_list)
+	if move_obj != null:
+		next_move_ready = false
+		$ShipBody2/ColldownSprite.show()
+		current_move = (move_obj)
+		change_moves.emit(current_move)
+		start_next_move.emit(current_move.move['time'])
+		$NextMove.start(current_move.move['time'])
+		if(current_move.move['type'] == ShipMove.MoveType.SPECIAL):
+			disableRadar(current_move.move['time'])
+			var special_function = current_move.move.get('func')
+			if(special_function && self.has_method(special_function)):
+				Callable(self, special_function).call(current_move.move['time'])
+			
 
 
 
@@ -159,8 +154,6 @@ func get_secondary_move() -> ShipMove:
 	if Input.is_action_pressed("move_left"):
 		return ShipMove.create(ShipMove.Moves.CURVE_LEFT)
 	if Input.is_action_pressed("move_down"):
-		move_list = []
-		change_moves.emit(move_list)
 		return null
 	if Input.is_action_pressed("move_up"):
 		return ShipMove.create(ShipMove.Moves.RETO_LONGO)
@@ -196,8 +189,6 @@ func get_secondary_move2() -> ShipMove:
 	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_LEFT):
 		return ShipMove.create(ShipMove.Moves.CURVE_LEFT)
 	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_DOWN):
-		move_list = []
-		change_moves.emit(move_list)
 		return null
 	if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_UP):
 		return ShipMove.create(ShipMove.Moves.RETO_LONGO)
