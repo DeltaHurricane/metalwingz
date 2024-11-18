@@ -12,6 +12,7 @@ font_color = Color(0.624973, 0.699478, 0.960282, 1)
 
 [node name="ShipUi" type="Node2D"]
 modulate = Color(1, 1, 1, 0.607843)
+z_index = -3
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_bpse2")
 
