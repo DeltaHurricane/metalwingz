@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var number_of_ships = 2
+
 var ships_array: Array = []
 var damage_obj = {}
 
@@ -10,7 +10,7 @@ var ship_ui_scene = preload("res://scenes/shipUi/shipUi.tscn")
 
 
 func _ready() -> void:
-	for number in range(number_of_ships):
+	for number in range(Globals.player_number):
 		var newShip: Ship = ship_scene.instantiate()
 		newShip.player_index = number
 		newShip.name = str(number)

@@ -30,7 +30,6 @@ func setMoves(move: ShipMove) -> void:
 		var texture: Texture2D = move.move.sprite
 		var tHeight = texture.get_height()
 		var tWidth = texture.get_width()
-		print(tHeight)
 		moves.texture = texture
 		moves.scale = Vector2(14.0/tWidth,14.0/tHeight)
 	else:

@@ -24,10 +24,6 @@ var curr_shield: Shields = null
 var shield_object = preload("res://scenes/shields/shields.tscn")
 var granada_object = preload("res://scenes/granada/granada.tscn")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
-	
 
 func _process(delta: float) -> void:
 	apply_central_impulse(Vector2(Vector2.UP.rotated(rotation) * current_move.move[ShipMove.Dir.FORCE]  * delta))
@@ -93,7 +89,7 @@ func on_colision(damage: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if(next_move_ready):
-		if player_index == 0:
+		if player_index == 1:
 			if event is InputEventKey and event.pressed:
 				if Input.is_key_pressed(KEY_ALT):
 					add_move(get_special_move())

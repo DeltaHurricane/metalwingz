@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://7hdm20w3i1vg"]
+
+[ext_resource type="Script" path="res://scenes/multiplayer/multiplayer.gd" id="1_3y4xh"]
+[ext_resource type="PackedScene" uid="uid://dwwpbyho4tqlq" path="res://scenes/ship/ship.tscn" id="2_7lmcn"]
+[ext_resource type="PackedScene" uid="uid://be3qcxgad5euq" path="res://scenes/WorldBoundary/mundo.tscn" id="3_oc8xb"]
+[ext_resource type="PackedScene" uid="uid://qyspuc3ath41" path="res://scenes/bg/bg.tscn" id="4_4a67v"]
+
+[node name="Multiplayer" type="Node2D"]
+script = ExtResource("1_3y4xh")
+player_scene = ExtResource("2_7lmcn")
+
+[node name="Mundo" parent="." instance=ExtResource("3_oc8xb")]
+scale = Vector2(0.3, 0.3)
+
+[node name="Host" type="Button" parent="."]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 16.0
+offset_bottom = 16.0
+text = "Host"
+
+[node name="Join" type="Button" parent="."]
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 16.0
+offset_bottom = 56.0
+text = "Join
+"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/ship/ship.tscn")
+spawn_path = NodePath("..")
+
+[node name="Bg" parent="." instance=ExtResource("4_4a67v")]
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]

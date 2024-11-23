@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwwpbyho4tqlq"]
+[gd_scene load_steps=8 format=3 uid="uid://dwwpbyho4tqlq"]
 
 [ext_resource type="Script" path="res://scenes/ship/ship.gd" id="1_i3f1w"]
 [ext_resource type="Texture2D" uid="uid://b7yjp8jelnsm7" path="res://assets/Fighter/Idle.png" id="3_1s5vt"]
@@ -11,6 +11,35 @@ bounce = 1.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tndx8"]
 radius = 7.0
 height = 26.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a1fa0"]
+properties/0/path = NodePath(".:replicated_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:replicated_rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:replicated_linear_velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:replicated_angular_velocity")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:linear_velocity")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:angular_velocity")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:rotation")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath(".:player_index")
+properties/8/spawn = true
+properties/8/replication_mode = 1
 
 [node name="Ship" type="RigidBody2D"]
 collision_mask = 15
@@ -50,6 +79,9 @@ one_shot = true
 
 [node name="DaDanoDeColisao" parent="." node_paths=PackedStringArray("nodeColisor") instance=ExtResource("4_0djxf")]
 nodeColisor = NodePath("..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_a1fa0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="Radar" to="." method="_on_radar_body_entered"]

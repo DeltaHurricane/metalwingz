@@ -18,6 +18,7 @@ config/icon="res://assets/Fighter/Idle.png"
 [autoload]
 
 AutoloadedSignals="*res://SignalsAutoload.gd"
+Globals="*res://Globals.gd"
 
 [debug]
 
