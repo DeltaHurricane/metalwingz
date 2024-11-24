@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://6tmo8kay6y12"]
+
+[ext_resource type="Script" path="res://scenes/ui/menu/menu.gd" id="1_es6le"]
+[ext_resource type="PackedScene" uid="uid://qyspuc3ath41" path="res://scenes/utils/bg/bg.tscn" id="2_41far"]
+[ext_resource type="Script" path="res://scenes/ui/menu/gameButton.gd" id="2_80knn"]
+[ext_resource type="PackedScene" uid="uid://dbbsogecs7agw" path="res://scenes/ui/changePlayerNumber/changePlayerNumber.tscn" id="3_so6ym"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -103.5
+offset_right = 81.0
+offset_bottom = 103.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_es6le")
+metadata/_edit_group_ = true
+
+[node name="Bg" parent="." instance=ExtResource("2_41far")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ChangePlayerNumber" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_so6ym")]
+layout_mode = 2
+
+[node name="Game" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Game
+"
+script = ExtResource("2_80knn")
+
+[node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Multiplayer" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Multipleye
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Game" to="." method="_on_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Multiplayer" to="." method="_on_multiplayer_pressed"]

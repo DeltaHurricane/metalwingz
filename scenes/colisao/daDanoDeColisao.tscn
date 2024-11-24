@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcd8guk1qivr4"]
-
-[ext_resource type="Script" path="res://scenes/colisao/da_dano_de_colisao.gd" id="1_gxygq"]
-
-[node name="DaDanoDeColisao" type="Node"]
-script = ExtResource("1_gxygq")

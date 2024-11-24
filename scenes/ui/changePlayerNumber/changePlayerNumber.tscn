@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbbsogecs7agw"]
+
+[ext_resource type="Script" path="res://scenes/ui/changePlayerNumber/change_player_number.gd" id="1_k2fw3"]
+[ext_resource type="Texture2D" uid="uid://qhxv7a014ng7" path="res://assets/Arrows/blue_back.png" id="1_ljbh8"]
+[ext_resource type="Texture2D" uid="uid://wjrrr83djkuq" path="res://assets/Arrows/red_up.png" id="2_k5mlk"]
+
+[node name="ChangePlayerNumber" type="HBoxContainer"]
+offset_right = 169.0
+offset_bottom = 50.0
+script = ExtResource("1_k2fw3")
+
+[node name="Remove" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_right = NodePath("../Add")
+focus_neighbor_bottom = NodePath("../Add")
+text = "-"
+icon = ExtResource("1_ljbh8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Total Players"
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+
+[node name="Add" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Remove")
+focus_neighbor_top = NodePath("../Remove")
+text = "+"
+icon = ExtResource("2_k5mlk")
+
+[connection signal="pressed" from="Remove" to="." method="_on_remove_pressed"]
+[connection signal="pressed" from="Add" to="." method="_on_add_pressed"]
