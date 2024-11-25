@@ -24,11 +24,14 @@ func _toggled(button_pressed):
 		grab_focus()
 		
 		
-func _unhandled_input(event):
-	if event.pressed:
-		InputMap.action_erase_events(action)
-		InputMap.action_add_event(action, event)
-		button_pressed = false
+func _unhandled_input(event) -> void:
+	Globals.inputHelper._input(event)
+	if  (event is InputEventJoypadMotion and abs(event.axis_value) < 0.7):
+			return
+	#Globals.inputHelper.set_keyboard_or_joypad_input_for_action(action, event)
+	InputMap.action_erase_events(action)
+	InputMap.action_add_event(action, event)
+	button_pressed = false
 	
 	
 func update_key_text():

@@ -15,6 +15,7 @@ var currentPlayerIndex: int = 0:
 @onready var main_menu_button = %MainMenuButton
 
 
+
 func _ready():
 	create_action_remap_items()
 	Globals.changePlayerCount.connect(changeMaxPlayers)
@@ -45,6 +46,7 @@ func _on_visibility_changed():
 
 
 func _on_main_menu_button_pressed():
+	Globals.save_input()
 	get_tree().change_scene_to_file("res://scenes/ui/menu/menu.tscn")
 
 func _on_quit_button_pressed():
@@ -64,8 +66,10 @@ func create_action_remap_items() -> void:
 			InputMap.add_action(action + "%s" %  str(currentPlayerIndex))
 		
 		
-		var button = RemapButton.new()
+		var button: Button = RemapButton.new()
 		button.action = action + "%s" %  str(currentPlayerIndex)
+		button.custom_minimum_size.x = 200
+		button.clip_text = true
 
 		button.focus_neighbor_top = previous_item.get_path()
 		previous_item.focus_neighbor_bottom = button.get_path()
