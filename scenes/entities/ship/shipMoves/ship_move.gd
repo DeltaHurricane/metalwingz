@@ -41,8 +41,8 @@ static var strong_force:int = 300
 static var rotate:int = 300
 
 static var move_list: Dictionary = {
-	ShipMove.Moves.SMALL_CURVE_RIGHT: {'time':1.0, 'type': ShipMove.MoveType.NORMAL,ShipMove.Dir.TORQUE:medium_force, ShipMove.Dir.FORCE: small_force, 'sprite':small_right  },
-	ShipMove.Moves.SMALL_CURVE_LEFT: {'time':1.0,'type': ShipMove.MoveType.NORMAL,ShipMove.Dir.TORQUE:-medium_force, ShipMove.Dir.FORCE: small_force,'sprite':small_left },
+	ShipMove.Moves.SMALL_CURVE_RIGHT: {'time':0.5, 'type': ShipMove.MoveType.NORMAL,ShipMove.Dir.TORQUE:medium_force, ShipMove.Dir.FORCE: small_force, 'sprite':small_right  },
+	ShipMove.Moves.SMALL_CURVE_LEFT: {'time':0.5,'type': ShipMove.MoveType.NORMAL,ShipMove.Dir.TORQUE:-medium_force, ShipMove.Dir.FORCE: small_force,'sprite':small_left },
 	ShipMove.Moves.CURVE_RIGHT: {'time':1.5,'type': ShipMove.MoveType.NORMAL,ShipMove.Dir.TORQUE:medium_force, ShipMove.Dir.FORCE: medium_force,'sprite':right },
 	ShipMove.Moves.CURVE_LEFT: {'time':1.5,'type': ShipMove.MoveType.NORMAL,ShipMove.Dir.TORQUE:-medium_force, ShipMove.Dir.FORCE: medium_force,'sprite':left },
 	ShipMove.Moves.RETO_LONGO: {'time':1.5,'type': ShipMove.MoveType.NORMAL,ShipMove.Dir.TORQUE:0, ShipMove.Dir.FORCE: strong_force,'sprite':long_reto },

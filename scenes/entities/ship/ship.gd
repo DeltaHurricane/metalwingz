@@ -17,8 +17,8 @@ var curr_shield: Shields = null
 
 @export var player_index: int = 0
 @export var health:float = 3.0
-@export var radarHeight:float = 0.4
-@export var radarWidth:float = 0.8
+@export var radarHeight:float = 0.7
+@export var radarWidth:float = 1.1
 @export var max_speed:int = 300 # How fast the player will move (pixels/sec).
 
 var shield_object = preload("./shields/shields.tscn")
@@ -90,10 +90,10 @@ func on_colision(damage: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if(next_move_ready):
 		#if event is InputEventKey and event.pressed:
-		if Input.is_action_pressed("fast"+str(player_index)):
+		if Input.is_action_pressed("spec"+str(player_index)):
 			add_move(get_special_move())
 			return
-		if Input.is_action_pressed("spec"+str(player_index)):
+		if Input.is_action_pressed("fast"+str(player_index)):
 			add_move(get_secondary_move())
 		else:
 			add_move(get_move())
@@ -164,42 +164,6 @@ func get_special_move() -> ShipMove:
 	if Input.is_action_pressed("move_down"+str(player_index)):
 		return ShipMove.create(ShipMove.Moves.GRANADE)
 	return null
-
-
-
-#func get_move2() -> ShipMove:
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_RIGHT):
-		#return ShipMove.create(ShipMove.Moves.SMALL_CURVE_RIGHT)
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_LEFT):
-		#return ShipMove.create(ShipMove.Moves.SMALL_CURVE_LEFT)
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_DOWN):
-		#return ShipMove.create(ShipMove.Moves.STOP)
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_UP):
-		#return ShipMove.create(ShipMove.Moves.RETO)
-	#return null
-#
-#func get_secondary_move2() -> ShipMove:
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_RIGHT):
-		#return ShipMove.create(ShipMove.Moves.CURVE_RIGHT)
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_LEFT):
-		#return ShipMove.create(ShipMove.Moves.CURVE_LEFT)
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_DOWN):
-		#return null
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_UP):
-		#return ShipMove.create(ShipMove.Moves.RETO_LONGO)
-	#return null
-#
-#func get_special_move2() -> ShipMove:
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_RIGHT):
-		#return ShipMove.create(ShipMove.Moves.CENTO80_RIGHT)
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_LEFT):
-		#return ShipMove.create(ShipMove.Moves.CENTO80_LEFT)
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_UP):
-		#return ShipMove.create(ShipMove.Moves.RAM)
-	#if Input.is_joy_button_pressed(player_index-1,JOY_BUTTON_DPAD_DOWN):
-		#return ShipMove.create(ShipMove.Moves.GRANADE)
-	#return null
-
 
 func _on_colision_imunity_timeout() -> void:
 	colisionImunity = false
