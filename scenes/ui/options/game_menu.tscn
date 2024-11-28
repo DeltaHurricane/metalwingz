@@ -15,6 +15,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_pgx83")
 
+[node name="Bg2" parent="." instance=ExtResource("2_ui4yx")]
+offset = Vector2(0, 720)
+transform = Transform2D(1, 0, 0, 1, 0, 720)
+
 [node name="Bg" parent="." instance=ExtResource("2_ui4yx")]
 
 [node name="ColorRect" type="ColorRect" parent="."]

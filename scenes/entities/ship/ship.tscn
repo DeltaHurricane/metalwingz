@@ -48,10 +48,9 @@ gravity_scale = 0.0
 center_of_mass_mode = 1
 contact_monitor = true
 max_contacts_reported = 4
-linear_damp = 0.5
+linear_damp = 0.8
 angular_damp = 1.5
 script = ExtResource("1_i3f1w")
-max_speed = 300
 
 [node name="ShipBodyColision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)

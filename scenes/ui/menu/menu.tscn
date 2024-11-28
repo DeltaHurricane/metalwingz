@@ -55,6 +55,10 @@ layout_mode = 2
 text = "Multipleye
 "
 
+[node name="Bg2" parent="." instance=ExtResource("2_41far")]
+offset = Vector2(0, 720)
+transform = Transform2D(1, 0, 0, 1, 0, 720)
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Game" to="." method="_on_game_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

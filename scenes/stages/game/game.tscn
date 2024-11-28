@@ -1,26 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://bh8ulkrbec0i6"]
+[gd_scene load_steps=7 format=3 uid="uid://bh8ulkrbec0i6"]
 
 [ext_resource type="Script" path="res://scenes/stages/game/game.gd" id="1_1c3uw"]
 [ext_resource type="PackedScene" uid="uid://be3qcxgad5euq" path="res://scenes/entities/WorldBoundary/mundo.tscn" id="1_f1klu"]
-[ext_resource type="PackedScene" uid="uid://ti1aeqxbvpnb" path="res://scenes/entities/granada/granada.tscn" id="3_coqvj"]
 [ext_resource type="PackedScene" uid="uid://qyspuc3ath41" path="res://scenes/utils/bg/bg.tscn" id="4_6wrfq"]
 [ext_resource type="PackedScene" uid="uid://ub5d0iuyvmqw" path="res://scenes/entities/asteroids/Asteroid.tscn" id="5_8jsl1"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_wfmdt"]
+font_size = 50
+
+[sub_resource type="Curve2D" id="Curve2D_iptrs"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -8, -8, 0, 0, 0, 0, 1928, -8, 0, 0, 0, 0, 1928, 1088, 0, 0, 0, 0, -8, 1088, 0, 0, 0, 0, -8, -8)
+}
+point_count = 5
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_1c3uw")
+spawn_scene = ExtResource("5_8jsl1")
 
 [node name="Mundo" parent="." instance=ExtResource("1_f1klu")]
-scale = Vector2(0.3, 0.3)
-
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Granada" parent="." instance=ExtResource("3_coqvj")]
-position = Vector2(377, 234)
 
 [node name="Bg" parent="." instance=ExtResource("4_6wrfq")]
 
-[node name="Asteroid" parent="." instance=ExtResource("5_8jsl1")]
-position = Vector2(425, 184)
+[node name="Label" type="Label" parent="Bg"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -108.0
+offset_top = -44.0
+offset_right = 108.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+label_settings = SubResource("LabelSettings_wfmdt")
+
+[node name="Bg2" parent="." instance=ExtResource("4_6wrfq")]
+offset = Vector2(0, 720)
+transform = Transform2D(1, 0, 0, 1, 0, 720)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="StartGameTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_iptrs")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(-8, -8)
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="StartGameTimer" to="." method="_on_start_game_timer_timeout"]

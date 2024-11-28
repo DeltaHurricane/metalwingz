@@ -1,6 +1,6 @@
 extends Node2D
 
-
+@export var spawn_scene: PackedScene
 
 var ships_array: Array = []
 var damage_obj = {}
@@ -57,5 +57,45 @@ func remove_loosers(name:String):
 			ships_array.remove_at(number)
 			break
 	if(ships_array.size() == 1):
-		$Label.text = ships_array[0].name + ' ganhou'
+		$Bg/Label.text ='player ' + ships_array[0].name + ' ganhou'
+		$SpawnTimer.stop()
+		get_tree().call_group("Asteroids", "queue_free")
+		
 			
+
+
+func _on_start_game_timer_timeout() -> void:
+	$SpawnTimer.start()
+
+
+func _on_spawn_timer_timeout() -> void:
+	# Create a new instance of the Mob scene.
+	var spawned_obj: Asteroido = spawn_scene.instantiate()
+
+	# Choose a random location on Path2D.
+	var mob_spawn_location = $SpawnPath/SpawnLocation
+	mob_spawn_location.progress_ratio = randf()
+
+	# Set the mob's direction perpendicular to the path direction.
+	var direction = mob_spawn_location.rotation + PI / 2
+
+	# Set the mob's position to a random location.
+	spawned_obj.position = mob_spawn_location.position
+
+	# Add some randomness to the direction.
+	direction += randf_range(-PI / 4, PI / 4)
+	spawned_obj.rotation = direction
+
+	# Choose the velocity for the mob.
+	var velocity = Vector2(randf_range(50.0, 250.0), 0.0)
+	spawned_obj.linear_velocity = velocity.rotated(direction)
+	spawned_obj.angular_velocity = randf_range(-5,5)
+	var variancia = randf_range(0.7, 1.5)
+	spawned_obj.tamanho = spawned_obj.tamanho * variancia
+	spawned_obj.mass = spawned_obj.mass * variancia
+
+	# Spawn the mob by adding it to the Main scene.
+	add_child(spawned_obj)
+	
+	#restart the timer with a random value
+	$SpawnTimer.start(randf_range(0.5, 5))

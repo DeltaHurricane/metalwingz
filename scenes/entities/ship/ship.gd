@@ -19,7 +19,7 @@ var curr_shield: Shields = null
 @export var health:float = 3.0
 @export var radarHeight:float = 0.4
 @export var radarWidth:float = 0.8
-@export var max_speed:int = 200 # How fast the player will move (pixels/sec).
+@export var max_speed:int = 300 # How fast the player will move (pixels/sec).
 
 var shield_object = preload("./shields/shields.tscn")
 var granada_object = preload("res://scenes/entities/granada/granada.tscn")
