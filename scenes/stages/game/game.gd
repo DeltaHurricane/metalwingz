@@ -14,8 +14,8 @@ func _ready() -> void:
 		var newShip: Ship = ship_scene.instantiate()
 		newShip.player_index = number
 		newShip.name = str(number)
-		newShip.position = Vector2(200*(number+1),(200*(number+1)))
-		newShip.rotation = 0.5 *PI#randf() * 2 * PI
+		newShip.position = Vector2((randf() * 1920),( randf() * 1080))
+		newShip.rotation = 0.5 *PI * randf() * 2 * PI
 		ships_array.append(newShip)
 		damage_obj[newShip.name] = 0
 		add_child(newShip)

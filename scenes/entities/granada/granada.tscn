@@ -48,28 +48,28 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_48lqh"]
-radius = 6.0
+radius = 12.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gf0tk"]
-radius = 11.0
+radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fnp4d"]
-radius = 15.0333
+radius = 30.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_05q0p"]
-radius = 20.025
+radius = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tkv3q"]
-radius = 27.0185
+radius = 54.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_28fcu"]
-radius = 34.3657
+radius = 68.6
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qpnnf"]
-radius = 60.0
+radius = 90.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30avp"]
-radius = 50.0
+radius = 110.0
 
 [node name="Granada" type="RigidBody2D"]
 collision_layer = 9
@@ -86,12 +86,11 @@ nodeColisor = NodePath("..")
 
 [node name="GranadaInerte" type="Sprite2D" parent="."]
 position = Vector2(-1, -1)
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_fc5y8")
 
 [node name="Explosao" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -3)
-scale = Vector2(0.7, 0.7)
+scale = Vector2(1.4, 1.4)
 sprite_frames = SubResource("SpriteFrames_spjan")
 
 [node name="Timer" type="Timer" parent="."]
@@ -103,47 +102,34 @@ one_shot = true
 autostart = true
 
 [node name="Hitbox_0" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_48lqh")
 disabled = true
 
 [node name="Hitbox_1" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_gf0tk")
 disabled = true
 
 [node name="Hitbox_2" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, -2)
 shape = SubResource("CircleShape2D_fnp4d")
 disabled = true
 
 [node name="Hitbox_3" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, -2)
 shape = SubResource("CircleShape2D_05q0p")
 disabled = true
 
 [node name="Hitbox_4" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(1, -2)
 shape = SubResource("CircleShape2D_tkv3q")
 disabled = true
 
 [node name="Hitbox_5" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_28fcu")
 disabled = true
 
 [node name="Hitbox_6" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(2, -3)
-scale = Vector2(0.7, 0.7)
 shape = SubResource("CircleShape2D_qpnnf")
 disabled = true
 
 [node name="Hitbox_7" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_30avp")
 disabled = true
 
