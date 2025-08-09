@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ub5d0iuyvmqw"]
 
 [ext_resource type="Texture2D" uid="uid://3vlq7xk5lggd" path="res://assets/Asteroid/Asteroid 01 - Base.png" id="1_wyb6s"]
-[ext_resource type="Script" path="res://scenes/entities/asteroids/asteroid.gd" id="1_yg4bl"]
+[ext_resource type="Script" uid="uid://b4j8dcndd8jl6" path="res://scenes/entities/asteroids/asteroid.gd" id="1_yg4bl"]
 [ext_resource type="PackedScene" uid="uid://dcd8guk1qivr4" path="res://scenes/utils/colisao/daDanoDeColisao.tscn" id="2_fqsn6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_00m3x"]

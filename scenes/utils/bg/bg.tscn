@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://qyspuc3ath41"]
 
 [ext_resource type="Texture2D" uid="uid://17u3wlh4x2ld" path="res://assets/Background/Condesed/Starry background  - Layer 01 - Void.png" id="1_f6s3n"]
-[ext_resource type="Shader" path="res://scenes/utils/bg/stars.gdshader" id="2_jpy1v"]
+[ext_resource type="Shader" uid="uid://ct71gp3f75dt4" path="res://scenes/utils/bg/stars.gdshader" id="2_jpy1v"]
 [ext_resource type="Texture2D" uid="uid://di2cbiss05dxe" path="res://assets/Background/Split up/Starry background  - Layer 03 - Stars.png" id="2_k6smu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_43dlq"]

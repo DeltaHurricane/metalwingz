@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://ti1aeqxbvpnb"]
 
-[ext_resource type="Script" path="res://scenes/entities/granada/granada.gd" id="1_2mkat"]
+[ext_resource type="Script" uid="uid://boi8ycfilloel" path="res://scenes/entities/granada/granada.gd" id="1_2mkat"]
 [ext_resource type="Texture2D" uid="uid://o83aukjua4ha" path="res://assets/Explosions/Explosion_blue_circle/Explosion_blue_circle1.png" id="1_tkl13"]
 [ext_resource type="Texture2D" uid="uid://l2npmxwb5an2" path="res://assets/Circle_explosion1.png" id="2_fc5y8"]
 [ext_resource type="Texture2D" uid="uid://b1o7cv3vy61mf" path="res://assets/Explosions/Explosion_blue_circle/Explosion_blue_circle2.png" id="2_w1ri2"]

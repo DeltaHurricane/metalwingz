@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://7hdm20w3i1vg"]
 
-[ext_resource type="Script" path="res://scenes/stages/multiplayer/multiplayer.gd" id="1_3y4xh"]
+[ext_resource type="Script" uid="uid://b4pf2iav5js08" path="res://scenes/stages/multiplayer/multiplayer.gd" id="1_3y4xh"]
 [ext_resource type="PackedScene" uid="uid://dwwpbyho4tqlq" path="res://scenes/entities/ship/ship.tscn" id="2_7lmcn"]
 [ext_resource type="PackedScene" uid="uid://be3qcxgad5euq" path="res://scenes/entities/WorldBoundary/mundo.tscn" id="3_oc8xb"]
 [ext_resource type="PackedScene" uid="uid://qyspuc3ath41" path="res://scenes/utils/bg/bg.tscn" id="4_4a67v"]

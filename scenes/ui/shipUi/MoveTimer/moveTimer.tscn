@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cpltnkljepuc" path="res://assets/Timer/row-1-column-2.png" id="1_wcsot"]
 [ext_resource type="Texture2D" uid="uid://drhinrdnhkd24" path="res://assets/Timer/row-1-column-9.png" id="2_lg875"]
-[ext_resource type="Script" path="res://scenes/ui/shipUi/MoveTimer/move_timer.gd" id="2_nqx4d"]
+[ext_resource type="Script" uid="uid://dwhg6ojnbb6fu" path="res://scenes/ui/shipUi/MoveTimer/move_timer.gd" id="2_nqx4d"]
 [ext_resource type="Texture2D" uid="uid://6k8itq0e18hd" path="res://assets/Timer/row-1-column-8.png" id="3_86n2v"]
 [ext_resource type="Texture2D" uid="uid://bxwabis4o4mt1" path="res://assets/Timer/row-1-column-7.png" id="4_kw8di"]
 [ext_resource type="Texture2D" uid="uid://cwgu0bc8v2a0k" path="res://assets/Timer/row-1-column-6.png" id="5_xwiyd"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://egcqoha7bkfg"]
 
-[ext_resource type="Script" path="res://scenes/entities/ship/shields/shields.gd" id="1_wu21i"]
+[ext_resource type="Script" uid="uid://b5o84pj8hrtxb" path="res://scenes/entities/ship/shields/shields.gd" id="1_wu21i"]
 [ext_resource type="PackedScene" uid="uid://dcd8guk1qivr4" path="res://scenes/utils/colisao/daDanoDeColisao.tscn" id="2_uwghl"]
 
 [node name="Shields" type="Area2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bh8ulkrbec0i6"]
 
-[ext_resource type="Script" path="res://scenes/stages/game/game.gd" id="1_1c3uw"]
+[ext_resource type="Script" uid="uid://dh0jpixckt3fn" path="res://scenes/stages/game/game.gd" id="1_1c3uw"]
 [ext_resource type="PackedScene" uid="uid://be3qcxgad5euq" path="res://scenes/entities/WorldBoundary/mundo.tscn" id="1_f1klu"]
 [ext_resource type="PackedScene" uid="uid://qyspuc3ath41" path="res://scenes/utils/bg/bg.tscn" id="4_6wrfq"]
 [ext_resource type="PackedScene" uid="uid://ub5d0iuyvmqw" path="res://scenes/entities/asteroids/Asteroid.tscn" id="5_8jsl1"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4ne4pd4eiy4c"]
 
 [ext_resource type="Texture2D" uid="uid://dmb08d2q1wgfb" path="res://assets/radarTeste.png" id="1_h4xbt"]
-[ext_resource type="Script" path="res://scenes/entities/ship/shields/shields_body.gd" id="1_ptjc4"]
+[ext_resource type="Script" uid="uid://cxnv576g6ukqg" path="res://scenes/entities/ship/shields/shields_body.gd" id="1_ptjc4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_b5rln"]
 friction = 0.0

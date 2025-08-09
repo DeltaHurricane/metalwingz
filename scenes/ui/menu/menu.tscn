@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://6tmo8kay6y12"]
 
-[ext_resource type="Script" path="res://scenes/ui/menu/menu.gd" id="1_es6le"]
+[ext_resource type="Script" uid="uid://di8y0vydigywj" path="res://scenes/ui/menu/menu.gd" id="1_es6le"]
 [ext_resource type="PackedScene" uid="uid://qyspuc3ath41" path="res://scenes/utils/bg/bg.tscn" id="2_41far"]
-[ext_resource type="Script" path="res://scenes/ui/menu/gameButton.gd" id="2_80knn"]
+[ext_resource type="Script" uid="uid://b5762sohqe8g3" path="res://scenes/ui/menu/gameButton.gd" id="2_80knn"]
 [ext_resource type="PackedScene" uid="uid://dbbsogecs7agw" path="res://scenes/ui/changePlayerNumber/changePlayerNumber.tscn" id="3_so6ym"]
 
 [node name="Menu" type="Control"]
