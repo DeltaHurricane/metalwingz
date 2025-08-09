@@ -11,11 +11,14 @@ var ship_ui_scene = preload("res://scenes/ui/shipUi/shipUi.tscn")
 
 func _ready() -> void:
 	for number in range(Globals.player_number):
+		var modulateTest = Color(randf(), randf(), randf(), 1.0)
 		var newShip: Ship = ship_scene.instantiate()
 		newShip.player_index = number
 		newShip.name = str(number)
+		newShip.modulo = modulateTest
 		newShip.position = Vector2((randf() * 1920),( randf() * 1080))
 		newShip.rotation = 0.5 *PI * randf() * 2 * PI
+		newShip.modulate = modulateTest
 		ships_array.append(newShip)
 		damage_obj[newShip.name] = 0
 		add_child(newShip)
@@ -23,6 +26,7 @@ func _ready() -> void:
 		var newHP: Ship_UI = ship_ui_scene.instantiate()
 		newHP.max_hp = newShip.health
 		newHP.ship_id = newShip.player_index
+		newHP.modulo = modulateTest
 		newHP.position = Vector2(200+(200*(newShip.player_index)),40)
 		add_child(newHP)
 		

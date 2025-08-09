@@ -7,6 +7,9 @@ var ship_id: int = 0:
 		ship_id = new_id
 		$Player.text = 'P'+str(new_id)
 var max_hp: float = 0
+var modulo: Color = Color(0, 0, 0, 1):
+	set(newModulo):
+		$Player.modulate = newModulo
 
 
 var current_hp: String = '100%'

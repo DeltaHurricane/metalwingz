@@ -14,11 +14,15 @@ var colisionImunity: bool = false
 var next_move_ready: bool = true
 var curr_shield: Shields = null
 
+var modulo: Color = Color(0, 0, 0, 1):
+	set(newModulo):
+		$ShipBody2.modulate = newModulo
+
 
 @export var player_index: int = 0
 @export var health:float = 3.0
-@export var radarHeight:float = 0.7
-@export var radarWidth:float = 1.1
+@export var radarHeight:float = 0.65
+@export var radarWidth:float = 1.0
 @export var max_speed:int = 300 # How fast the player will move (pixels/sec).
 
 var shield_object = preload("./shields/shields.tscn")
