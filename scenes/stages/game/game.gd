@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export var spawn_scene: PackedScene
 
@@ -57,7 +57,7 @@ func remove_loosers(name:String):
 			ships_array.remove_at(number)
 			break
 	if(ships_array.size() == 1):
-		$Bg/Label.text ='player ' + ships_array[0].name + ' ganhou'
+		$NonParalaxBG/Label.text ='player ' + ships_array[0].name + ' ganhou'
 		$SpawnTimer.stop()
 		get_tree().call_group("Asteroids", "queue_free")
 		

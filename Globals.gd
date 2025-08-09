@@ -7,6 +7,9 @@ var save_path = "user://input_map.json"
 
 func _ready() -> void:
 	load_input()
+	var tete = DisplayServer.screen_get_size()
+	print(tete)
+
 
 var player_number: int = 2:
 	set(newNumber):

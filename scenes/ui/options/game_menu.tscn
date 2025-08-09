@@ -1,25 +1,29 @@
 [gd_scene load_steps=6 format=3 uid="uid://daxygoynvdyya"]
 
 [ext_resource type="Script" uid="uid://cd6xl8s6uwuru" path="res://scenes/ui/options/game_menu.gd" id="2_pgx83"]
-[ext_resource type="PackedScene" uid="uid://qyspuc3ath41" path="res://scenes/utils/bg/bg.tscn" id="2_ui4yx"]
+[ext_resource type="PackedScene" uid="uid://bmseo0o33mlhx" path="res://scenes/utils/bg/non_paralax_bg.tscn" id="2_xchcp"]
 [ext_resource type="PackedScene" uid="uid://dbbsogecs7agw" path="res://scenes/ui/changePlayerNumber/changePlayerNumber.tscn" id="3_vf1v4"]
 [ext_resource type="Texture2D" uid="uid://chjk0y2issu02" path="res://assets/Arrows/green_down.png" id="4_aoxtj"]
 [ext_resource type="Texture2D" uid="uid://cmw20fckmgpvs" path="res://assets/Arrows/green_up.png" id="5_o1otn"]
 
 [node name="GameMenu" type="Control"]
+clip_children = 1
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = 960.0
+offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 script = ExtResource("2_pgx83")
 
-[node name="Bg2" parent="." instance=ExtResource("2_ui4yx")]
-offset = Vector2(0, 720)
-transform = Transform2D(1, 0, 0, 1, 0, 720)
-
-[node name="Bg" parent="." instance=ExtResource("2_ui4yx")]
+[node name="NonParalaxBG" parent="." instance=ExtResource("2_xchcp")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -32,9 +36,15 @@ color = Color(0.0705882, 0.0705882, 0.0705882, 0.780392)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -362.0
+offset_top = -111.0
+offset_right = 362.0
+offset_bottom = 111.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 256
